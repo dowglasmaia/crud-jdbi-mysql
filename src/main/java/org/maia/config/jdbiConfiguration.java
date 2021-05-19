@@ -7,6 +7,8 @@ import org.jdbi.v3.core.spi.JdbiPlugin;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
 
 import org.maia.dao.UserDao;
+import org.maia.dao.UserRepository;
+import org.maia.service.UserServices02;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy;
@@ -20,7 +22,7 @@ import java.util.List;
 public class jdbiConfiguration {
 
     @Bean
-    public Jdbi jdbi(DataSource ds,List<JdbiPlugin> jdbiPlugins, List<RowMapper<?>> rowMappers) {
+    public Jdbi jdbi(DataSource ds, List<JdbiPlugin> jdbiPlugins, List<RowMapper<?>> rowMappers) {
         TransactionAwareDataSourceProxy proxy = new TransactionAwareDataSourceProxy(ds);
         Jdbi jdbi = Jdbi.create(proxy);
 
@@ -36,9 +38,15 @@ public class jdbiConfiguration {
     }
 
     @Bean
-    public UserDao userDao(Jdbi jdbi){
+    public UserDao userDao(Jdbi jdbi) {
         return jdbi.onDemand(UserDao.class);
     }
+
+    @Bean
+    public UserServices02 services02(UserRepository userRepository) {
+        return new UserServices02(userRepository);
+    }
+
 
     @Bean
     public JdbiPlugin sqlObjectPlugin() {

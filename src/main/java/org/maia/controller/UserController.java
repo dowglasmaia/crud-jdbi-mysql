@@ -18,6 +18,7 @@ public class UserController {
     @Autowired
     private UserServices services;
 
+
     @PostMapping
     public ResponseEntity<String> createUser(@RequestBody User user) {
         String identificationUser = services.createUser(user);
