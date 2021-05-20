@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface UserRepository extends Serializable {
 
-    String insert(User user);
+    User insert(User user);
 
     /*User findByIdentification(String identification);
 

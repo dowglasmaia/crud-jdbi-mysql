@@ -20,7 +20,7 @@ public class UsuarioController {
 
     @PostMapping
     public ResponseEntity<String> createUser(@RequestBody User user) {
-        String identificationUser = services.createUser(user);
+        User identificationUser = services.createUser(user);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{identification}")

@@ -15,52 +15,27 @@ import java.util.List;
 //https://medium.com/cwi-software/jdbi-uma-alternativa-al%C3%A9m-de-jdbc-e-jpa-hibernate-fb9ce29fdc
 
 @Component
-@RegisterBeanMapper(UserMapper.class)
+
 public class UsuarioServicesImpl implements UserRepository {
 
     @Autowired
     Jdbi jdbi;
 
     @Override
-    public String insert(User user) {
-        return jdbi.withHandle(handle -> {
+    @RegisterBeanMapper(UserMapper.class)
+    public User insert(User user) {
+       return jdbi.withHandle(handle -> {
             handle.createUpdate(
                     "INSERT INTO User_TB(identification, nome, email)" +
-                            " VALUES(:identification, :nome, :email)")
-                    .bindBean(User.builder()
-                            .identification(user.getIdentification())
-                            .nome(user.getNome())
-                            .email(user.getEmail())
-                            .build())
+                            " VALUES(?, ?, ?);")
+                    .bind(0,user.getIdentification())
+                    .bind(1,user.getNome())
+                    .bind(2,user.getEmail())
                     .execute();
-            return null;
+           return null;
         });
+
     }
 
 
-    /*@Override
-    //@RegisterBeanMapper(UserMapper.class)
-    public User findByIdentification(String identification) {
-        return jdbi.withHandle(handle -> {
-            handle.createQuery("SELECT * FROM User_TB as u " +
-                    "WHERE u.identification = :identification")
-                    .bind("identification", identification)
-                    .mapToBean(User.class)
-                    .one();
-            return null;
-        });
-    }
-
-
-    @Override
-    public List<User> findAll() {
-        List<User>users =   jdbi.withHandle(handle -> {
-            handle.createQuery("SELECT * FROM User_TB ORDER BY nome")
-                    .mapToBean(User.class)
-                    .list();
-
-            return null;
-        });
-        return users;
-    }*/
 }

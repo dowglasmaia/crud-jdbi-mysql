@@ -25,7 +25,7 @@ public class UserServices02 {
     }
 
     @Transactional
-    public String createUser(User user) {
+    public User createUser(User user) {
         String identificationUnique = UUIDGeneration.generationUUID();
         user.setIdentification(identificationUnique);
         try {
@@ -38,20 +38,5 @@ public class UserServices02 {
         }
     }
 
-  /*  @Transactional(readOnly = true)
-    public User getUserByIdentification(String identification) {
-        try {
-            log.info("Find Usuario com Services v2");
-            return userRepository.findByIdentification(identification);
-        } catch (Exception error) {
-            log.error("Falha ao tentar Buscar User pelo identification " + identification);
-            log.error(error.getMessage(), error.getCause());
-            throw new RuntimeException("Falha ao tentar Buscar User pelo identification " + identification);
-        }
-    }
 
-    @Transactional(readOnly = true)
-    public List<User> getAll() {
-        return userRepository.findAll();
-    }*/
 }
