@@ -3,14 +3,12 @@ package org.maia.service;
 import lombok.extern.slf4j.Slf4j;
 import org.maia.dao.UserDao;
 import org.maia.domain.User;
-import org.maia.domain.UserUpdateDto;
-import org.maia.mapper.UserMapper;
+import org.maia.model.UserUpdateDto;
 import org.maia.utils.UUIDGeneration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Set;
 
 @Slf4j
@@ -19,6 +17,7 @@ public class UserServices {
 
     @Autowired
     private UserDao userDao;
+
 
     @Transactional
     public String createUser(User user) {
@@ -58,8 +57,8 @@ public class UserServices {
     @Transactional
     public void deleteUser(String identification) {
         log.info("Iniciando Busca de Usuario para Exclusão");
-        getUserByIdentification(identification);
-        log.info("Usuario de identification "+ identification +" localizado para Exclusão " );
+       // getUserByIdentification(identification);
+        //log.info("Usuario de identification "+ identification +" localizado para Exclusão " );
         try {
             userDao.delete(identification);
         } catch (Exception error) {

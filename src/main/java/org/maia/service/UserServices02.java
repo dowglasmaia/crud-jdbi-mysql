@@ -1,17 +1,11 @@
 package org.maia.service;
 
 import lombok.extern.slf4j.Slf4j;
-import org.maia.dao.UserDao;
 import org.maia.dao.UserRepository;
 import org.maia.domain.User;
-import org.maia.domain.UserUpdateDto;
 import org.maia.utils.UUIDGeneration;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.Set;
 
 @Slf4j
 public class UserServices02 {

@@ -1,4 +1,4 @@
-package org.maia.domain;
+package org.maia.model;
 
 import lombok.Getter;
 import lombok.Setter;
