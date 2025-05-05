@@ -21,6 +21,7 @@ public class UserServices {
 
     @Transactional
     public String createUser(User user) {
+        log.info("Chamando o createUser: {}",user);
         String identificationUnique = UUIDGeneration.generationUUID();
         user.setIdentification(identificationUnique);
         try {

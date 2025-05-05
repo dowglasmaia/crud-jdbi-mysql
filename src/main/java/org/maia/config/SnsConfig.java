@@ -7,14 +7,15 @@ import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.sns.SnsClient;
 
+
 @Configuration
 public class SnsConfig {
 
     @Value("${aws.region}")
     private String awsRegion;
 
-    @Value("${aws.sns.topic.user-event-arn}")
-    private String awsUserEventsTopicArn;
+    @Value("${aws.topic.arn.user}")
+    private String awsUserEventsTopicArn; // = "arn:aws:sns:us-east-1:426300336245:user-events";
 
     @Bean
     public SnsClient snsClient(){

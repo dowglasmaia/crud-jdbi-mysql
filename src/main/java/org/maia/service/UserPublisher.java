@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.maia.domain.User;
 import org.maia.enums.EventType;
 import org.maia.model.Envelope;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.services.sns.SnsClient;
@@ -19,6 +20,8 @@ public class UserPublisher {
     private final String userEventTopicArn;
     private final ObjectMapper objectMapper;
 
+
+    @Autowired
     public UserPublisher(SnsClient snsClient,
                          @Qualifier("userEventsTopicArn") String userEventTopicArn,
                          ObjectMapper objectMapper) {
@@ -28,6 +31,8 @@ public class UserPublisher {
     }
 
     public void publishUserEvent(User user, EventType eventType, String userName) {
+        log.info("Chamando o createUser: {} e o tipo: {}", user, eventType);
+
         try {
             String messageBody = buildEnvelopeJson(user, eventType);
             PublishRequest request = PublishRequest.builder()

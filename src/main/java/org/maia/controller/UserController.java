@@ -1,5 +1,6 @@
 package org.maia.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.maia.domain.User;
 import org.maia.enums.EventType;
 import org.maia.model.UserUpdateDto;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.Set;
 
+@Slf4j
 @RestController
 @RequestMapping(value = "/api/v1/users")
 public class UserController {
@@ -26,13 +28,15 @@ public class UserController {
     @PostMapping
     public ResponseEntity<String> createUser(@RequestBody User user) {
         String identificationUser = services.createUser(user);
+
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{identification}")
                 .buildAndExpand(user.getIdentification()).toUri();
 
 
+        log.info("Chamando o SNS");
         userPublisher.publishUserEvent(user, EventType.USER_CREATED,"dowglas.maia");
-
+        log.info("Chamando do SNS realizado!");
         return ResponseEntity.created(uri).build();
     }
 

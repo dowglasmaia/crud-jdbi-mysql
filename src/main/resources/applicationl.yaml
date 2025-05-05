@@ -12,10 +12,10 @@ server:
   port: 8080
 
 aws:
-  region: ${AWS-REGION:us-east-1}
-  sns:
-    topic:
-      user-event-arn: ${AWS-TOPIC-USER:user-events}
+  region: ${AWS_REGION}
+  topic:
+    arn:
+      user: arn:aws:sns:us-east-1:426300336245:user-events
 
 management:
   endpoint:
