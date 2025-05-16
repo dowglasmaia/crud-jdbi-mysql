@@ -15,7 +15,7 @@ aws:
   region: ${AWS_REGION}
   topic:
     arn:
-      user: arn:aws:sns:us-east-1:426300336245:user-events
+      user: "arn:aws:sns:us-east-1:426300336245:user-events-topic"
 
 management:
   endpoint:

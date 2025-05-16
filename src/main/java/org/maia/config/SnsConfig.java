@@ -14,8 +14,8 @@ public class SnsConfig {
     @Value("${aws.region}")
     private String awsRegion;
 
-    @Value("${aws.topic.arn.user}")
-    private String awsUserEventsTopicArn; // = "arn:aws:sns:us-east-1:426300336245:user-events";
+   // @Value("${aws.topic.arn.user}")
+    private static final String awsUserEventsTopicArn = "arn:aws:sns:us-east-1:426300336245:user-events-topic";
 
     @Bean
     public SnsClient snsClient(){
